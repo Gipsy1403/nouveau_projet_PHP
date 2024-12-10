@@ -1,8 +1,10 @@
 <?php
-$bdd = new PDO('mysql:host=localhost;dbname=film;charset=utf8', 'root', '');
+$bdd = new PDO('mysql:host=localhost;port=3307;dbname=film;charset=utf8', 'root', '');
 $request=$bdd->prepare("SELECT *
 					FROM fiche_film");
 $request->execute([]);
+
+$imageNull = '<i class="fa-regular fa-image"></i>';
 
 ?>
 <!DOCTYPE html>
@@ -10,7 +12,9 @@ $request->execute([]);
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/all.css">
 	<link rel="stylesheet" href="style.css">
+
 	<title>Exercices PHP</title>
 </head>
 <body>
@@ -19,8 +23,15 @@ $request->execute([]);
 	<h1>Récupération de la requête</h1>
 	<section>
 	<?php
+	
 while($data=$request->fetch()):?>
 		<article>
+			<p><?php 
+			if(isset($data["images"])){
+				echo '<img src="image/' . $data["images"] . '" alt="' . $data["titre"] . '">';
+			}else{
+				echo $imageNull;
+				}; ?></p>
 			<p><?php echo $data["titre"]?></p>
 			<p>Durée : <?php
 			$min = $data["duree"]%60;

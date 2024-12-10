@@ -1,5 +1,5 @@
 <?php
-$bdd = new PDO('mysql:host=localhost;dbname=film;charset=utf8', 'root', '');
+$bdd = new PDO('mysql:host=localhost;port=3307;dbname=film;charset=utf8', 'root', '');
 // je me connecte à la base de données
 
 //////////////////////////PERMETTRE A L UTILISATEUR DE SUPPRIMER LES CHAMPS SAISIES DU FORMULAIRE
