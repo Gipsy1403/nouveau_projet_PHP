@@ -1,10 +1,7 @@
 <?php
-$bdd = new PDO('mysql:host=localhost;port=3307;dbname=film;charset=utf8', 'root', '');
-$request=$bdd->prepare("SELECT *
-					FROM fiche_film");
-$request->execute([]);
+include ("pokemon.php");
+// include ("autre.php");
 
-$imageNull = '<i class="fa-regular fa-image"></i>';
 
 ?>
 <!DOCTYPE html>
@@ -15,38 +12,28 @@ $imageNull = '<i class="fa-regular fa-image"></i>';
 	<link rel="stylesheet" href="css/all.css">
 	<link rel="stylesheet" href="style.css">
 
-	<title>Exercices PHP</title>
+	<title>Exercices POO pokemon</title>
 </head>
 <body>
-<?php include("nav.php")?>
 
-	<h1>Récupération de la requête</h1>
-	<section>
-	<?php
-	
-while($data=$request->fetch()):?>
-		<article>
-			<p><?php 
-			if(isset($data["images"])){
-				echo '<img src="image/' . $data["images"] . '" alt="' . $data["titre"] . '">';
-			}else{
-				echo $imageNull;
-				}; ?></p>
-			<p><?php echo $data["titre"]?></p>
-			<p>Durée : <?php
-			$min = $data["duree"]%60;
-			$heure = ($data["duree"]-$min)/60;
-			echo $heure. "h".$min. "min";?></p>
-			<p><?php echo $data["date"]?></p>
-			<a href="voirplus.php?id=<?php echo $data["id"]?>">Voir plus</a>
-			<!-- url permet d'envoyer une requete GET (grace au ?, clée, egal)-->
-			<a href="modifier.php?id=<?php echo $data["id"]?>">modifier</a>
-			<a href="supprimer.php?id=<?php echo $data["id"]?>">supprimer</a>
-		</article>
-<?php endwhile ?>
-	</section>	
+<p>
+<?php
 
 
+	$pikachu = new Pokemon("Pikachu",55,"Electrique",200);
+	$salameche = new Pokemon("Salamèche",60,"Feu",120);
+	$carapuce = new Pokemon("Carapuce",50,"Eau",150);
+
+	$pikachu->pokedex();
+	$salameche->pokedex();
+	$carapuce->pokedex();
+
+	$pikachu->frapper($carapuce);
+
+
+
+?>
+</p>
 
 
 </body>
